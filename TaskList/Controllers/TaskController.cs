@@ -76,12 +76,12 @@ public class TaskController : Controller
         if (cmd == null)
             return BadRequest();
         cmd.Id = id;
-        await _commandHandler.UpdateFullAsync(cmd);
+       // await _commandHandler.UpdateFullAsync(cmd);
         return Ok();
     }
     
     /// <summary>
-    /// resolve Task /Task/5
+    /// resolve Task /Task/resolve
     /// </summary>
     [HttpPatch("{id}/resolve")]
     public async Task<ActionResult> ResolveTaskAsync(Guid id, [FromBody]TaskResolveCommand cmd)
@@ -92,7 +92,7 @@ public class TaskController : Controller
     }
     
     /// <summary>
-    /// Insert Task /Task/5
+    /// delete Task /Task/5
     /// </summary>
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteTaskAsync(Guid id)
