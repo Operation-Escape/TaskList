@@ -19,20 +19,20 @@ public class TaskCommandHandler : ITaskCommandHandler
         _mapper = mapper;
     }
 
-    public async Task UpdateFullAsync(TaskCreateUpdateCommand cmd)
-    {
-        var task = await _sqlContext.Tasks.FirstOrDefaultAsync(x => x.Id == cmd.Id);
-        if(task == null)
-            return;
-        task.Name = cmd.Name;
-        task.State = cmd.State;
-        task.Description = cmd.Description;
-        task.RemainingWork = cmd.RemainingWork;
-        task.CompletedWork = cmd.CompletedWork;
-        task.OrginalEstimate = cmd.OrginalEstimate;
-        _sqlContext.Update(task);
-        await _sqlContext.SaveChangesAsync();
-    }
+    // public async Task UpdateFullAsync(TaskCreateUpdateCommand cmd)
+    // {
+    //     var task = await _sqlContext.Tasks.FirstOrDefaultAsync(x => x.Id == cmd.Id);
+    //     if(task == null)
+    //         return;
+    //     task.Name = cmd.Name;
+    //     task.State = cmd.State;
+    //     task.Description = cmd.Description;
+    //     task.RemainingWork = cmd.RemainingWork;
+    //     task.CompletedWork = cmd.CompletedWork;
+    //     task.OrginalEstimate = cmd.OrginalEstimate;
+    //     _sqlContext.Update(task);
+    //     await _sqlContext.SaveChangesAsync();
+    // }
     
     public async Task UpdateAsync(TaskCreateUpdateCommand cmd)
     {
