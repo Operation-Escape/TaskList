@@ -5,6 +5,8 @@ using TaskList.Application.AutoMapperProfiles;
 using TaskList.Application.CommandHandlers;
 using TaskList.Application.ReaderLogics;
 using TaskList.Domain;
+using TaskList.Domain.UnitOfWorks.Abstract;
+using TaskList.Domain.UnitOfWorks.UnitOfWorkForSql;
 using TaskList.Shared.Common.Extensions;
 
 namespace TaskList.Api;
@@ -51,6 +53,7 @@ public class Startup {
         services.AddAutoMapper(typeof(TaskAutoMapperProfile));
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
         if (app.Environment.IsDevelopment())
