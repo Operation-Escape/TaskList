@@ -32,7 +32,7 @@ public class Startup {
         builder.AddJsonFile("appsettings.json");
         builder.AddEnvironmentVariables();
 
-        var connectionString = Configuration.TryGetEnvironmentSetting("Postgres");
+        var connectionString = Configuration.TryGetEnvironmentSetting("Postgres1");
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
@@ -55,7 +55,7 @@ public class Startup {
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IRepository<Domain.Model.Task>, TaskRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
         if (app.Environment.IsDevelopment())

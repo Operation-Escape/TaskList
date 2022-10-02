@@ -17,13 +17,13 @@ public class SqlContext : DbContext
 
         modelBuilder.Entity<TaskModel>().HasKey(t => t.Id);
         modelBuilder.Entity<TaskModel>().Property(x => x.Id).ValueGeneratedOnAdd();
-        modelBuilder.Entity<TaskModel>().Property(x => x.Name).IsRequired();
-        modelBuilder.Entity<TaskModel>().Property(x => x.State).IsRequired();
+        modelBuilder.Entity<TaskModel>().Property(x => x.Name).HasDefaultValue(string.Empty).IsRequired();
+        modelBuilder.Entity<TaskModel>().Property(x => x.State).HasDefaultValue(0).IsRequired();
         modelBuilder.Entity<TaskModel>().Property(x => x.DateTimeCreated).IsRequired();
-        modelBuilder.Entity<TaskModel>().Property(x => x.Description);
-        modelBuilder.Entity<TaskModel>().Property(x => x.CompletedWork);
-        modelBuilder.Entity<TaskModel>().Property(x => x.OrginalEstimate);
-        modelBuilder.Entity<TaskModel>().Property(x => x.RemainingWork);
+        modelBuilder.Entity<TaskModel>().Property(x => x.Description).HasDefaultValue(string.Empty);
+        modelBuilder.Entity<TaskModel>().Property(x => x.CompletedWork).HasDefaultValue(0M);
+        modelBuilder.Entity<TaskModel>().Property(x => x.OrginalEstimate).HasDefaultValue(0M);
+        modelBuilder.Entity<TaskModel>().Property(x => x.RemainingWork).HasDefaultValue(0M);
     }
 
 }
