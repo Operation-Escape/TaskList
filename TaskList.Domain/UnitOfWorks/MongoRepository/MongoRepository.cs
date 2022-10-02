@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using TaskList.Domain.Models.Abstract;
 using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Domain.UnitOfWorks.MongoRepository.Abstract;
@@ -18,7 +19,8 @@ namespace TaskList.Domain.UnitOfWorks.MongoRepository
 
         public Task AddAsync(TEntity obj)
         {
-            throw new NotImplementedException();
+            Context.AddCommand(() => DbSet.InsertOneAsync(obj));
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -29,19 +31,19 @@ namespace TaskList.Domain.UnitOfWorks.MongoRepository
 
         public async Task<TEntity> GetByIdAsync(TKey id)
         {
-            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id));
+            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id));
             return data.SingleOrDefault();
         }
 
         public Task RemoveAsync(TKey id)
         {
-            Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
+            Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
             return Task.CompletedTask;
         }
 
         public Task UpdateAsync(TEntity obj)
         {
-            Context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.Id), obj));
+            Context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
             return Task.CompletedTask;
         }
 
