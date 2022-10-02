@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TaskModel = TaskList.Domain.Model.Task;
+using TaskModel = TaskList.Domain.Models.Sql.Task;
 
 namespace TaskList.Domain;
 

@@ -6,6 +6,9 @@ using TaskList.Application.CommandHandlers;
 using TaskList.Application.ReaderLogics;
 using TaskList.Domain;
 using TaskList.Domain.UnitOfWorks.Abstract;
+using TaskList.Domain.UnitOfWorks.MongoRepository;
+using TaskList.Domain.UnitOfWorks.MongoRepository.Abstract;
+using TaskList.Domain.UnitOfWorks.MongoRepository.Context;
 using TaskList.Domain.UnitOfWorks.UnitOfWorkForSql;
 using TaskList.Shared.Common.Extensions;
 
@@ -37,7 +40,11 @@ public class Startup {
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
         services.AddControllers();
-        
+
+        services.AddScoped<IMongoContext, MongoContext>();
+        //services.AddScoped<IUnitOfWork, MongoUnitOfWork>();
+        services.AddScoped<ITaskRepository, MongoTaskRepository>();
+
         //var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
         //    //.GetProperty("id");
         //    var v = swaggerOptions.GetProperty("Version");
@@ -55,7 +62,7 @@ public class Startup {
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
         if (app.Environment.IsDevelopment())

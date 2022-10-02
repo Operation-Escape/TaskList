@@ -1,10 +1,12 @@
-﻿namespace TaskList.Domain.UnitOfWorks.Abstract;
+﻿using TaskList.Domain.Models.Abstract;
 
-public interface IRepository<TEntity> : IDisposable where TEntity : class
+namespace TaskList.Domain.UnitOfWorks.Abstract;
+
+public interface IRepository<TEntity, TKey> : IDisposable where TEntity : IModel<TKey>
 {
-    Task Add(TEntity obj);
-    Task<TEntity?> GetById<TKey>(TKey id);
-    Task<IEnumerable<TEntity>> GetAll();
-    Task Update(TEntity obj);
-    Task Remove<TKey>(TKey id);
+    Task AddAsync(TEntity obj);
+    Task<TEntity> GetByIdAsync(TKey id);
+    Task<IEnumerable<TEntity>> GetAllAsync();
+    Task UpdateAsync(TEntity obj);
+    Task RemoveAsync(TKey id);
 }
