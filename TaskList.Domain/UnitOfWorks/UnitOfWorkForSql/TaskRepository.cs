@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskList.Domain.UnitOfWorks.Abstract;
-using TaskModel = TaskList.Domain.Model.Task;
 
 namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
 {
-    public class TaskRepository : IRepository<TaskModel>
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly SqlContext _db;
+        private DbSet<T> _table = null;
 
-        public TaskRepository(SqlContext db)
+        public Repository(SqlContext db)
         {
             _db = db;
+            _table = _db.Set<T>();
         }
 
-        public async Task Add(TaskModel model)
+        public async Task Add(T model)
         {
-            await _db.Tasks.AddAsync(model);
+            await _table.AddAsync(model);
         }
 
         public void Dispose()
@@ -24,20 +25,20 @@ namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IEnumerable<TaskModel>> GetAll() => await _db.Tasks.ToListAsync();
+        public async Task<IEnumerable<T>> GetAll() => await _table.ToListAsync();
 
-        public async Task<TaskModel?> GetById<TKey>(TKey id) => await _db.Tasks.FindAsync(id);
+        public async Task<T?> GetById<TKey>(TKey id) => await _table.FindAsync(id);
 
         public async Task Remove<TKey>(TKey id)
         {
-            var model = await _db.Tasks.FindAsync(id);
+            var model = await _table.FindAsync(id);
             if (model != null)
-                _db.Tasks.Remove(model);
+                _table.Remove(model);
         }
 
-        public Task Update(TaskModel obj)
+        public Task Update(T obj)
         {
-            _db.Entry(obj).State = EntityState.Modified;
+            _table.Update(obj);
             return Task.CompletedTask;
         }
     }

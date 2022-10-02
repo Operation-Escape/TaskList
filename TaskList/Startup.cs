@@ -5,6 +5,8 @@ using TaskList.Application.AutoMapperProfiles;
 using TaskList.Application.CommandHandlers;
 using TaskList.Application.ReaderLogics;
 using TaskList.Domain;
+using TaskList.Domain.UnitOfWorks.Abstract;
+using TaskList.Domain.UnitOfWorks.UnitOfWorkForSql;
 using TaskList.Shared.Common.Extensions;
 
 namespace TaskList.Api;
@@ -28,29 +30,32 @@ public class Startup {
         var builder = new ConfigurationBuilder();
         builder.SetBasePath(Directory.GetCurrentDirectory());
         builder.AddJsonFile("appsettings.json");
+        builder.AddEnvironmentVariables();
 
-        var connectionString = Configuration.TryGetEnvironmentSetting("Postgres");
+        var connectionString = Configuration.TryGetEnvironmentSetting("Postgres1");
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
         services.AddControllers();
         
-        var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
-            //.GetProperty("id");
-            var v = swaggerOptions.GetProperty("Version");
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc(Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value, new OpenApiInfo
-            {
-                Version = Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value,
-                Title = Configuration.GetSection(swaggerOptions.GetProperty("Title").ToString()).Value,
-                Description = Configuration.GetSection(swaggerOptions.GetProperty("Description").ToString()).Value
-            });
-        });
+        //var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
+        //    //.GetProperty("id");
+        //    var v = swaggerOptions.GetProperty("Version");
+        //services.AddSwaggerGen(c =>
+        //{
+        //    c.SwaggerDoc(Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value, new OpenApiInfo
+        //    {
+        //        Version = Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value,
+        //        Title = Configuration.GetSection(swaggerOptions.GetProperty("Title").ToString()).Value,
+        //        Description = Configuration.GetSection(swaggerOptions.GetProperty("Description").ToString()).Value
+        //    });
+        //});
 
         services.AddAutoMapper(typeof(TaskAutoMapperProfile));
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
         if (app.Environment.IsDevelopment())

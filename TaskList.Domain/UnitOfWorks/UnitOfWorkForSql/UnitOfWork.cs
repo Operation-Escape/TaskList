@@ -1,16 +1,18 @@
 ﻿using TaskList.Domain.UnitOfWorks.Abstract;
+using TaskModel = TaskList.Domain.Model.Task;
 
 namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly SqlContext _db;
-        public IRepository<Model.Task> TaskRepository { get; set; }
 
-        public UnitOfWork(SqlContext db)
+        public IRepository<TaskModel> Task { get; set; }
+
+        public UnitOfWork(SqlContext db, IRepository<TaskModel> taskRepository)
         {
             _db = db;
-            TaskRepository = new TaskRepository(db);
+            Task = taskRepository;
         }
 
         public void Dispose()
