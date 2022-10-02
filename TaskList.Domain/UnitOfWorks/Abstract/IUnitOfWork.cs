@@ -2,6 +2,6 @@
 
 public interface IUnitOfWork : IDisposable
 {
-    IRepository<TaskList.Domain.Model.Task> TaskRepository { get; set; }
+    IRepository<TaskList.Domain.Model.Task> Task { get; set; }
     bool Commit();
 }

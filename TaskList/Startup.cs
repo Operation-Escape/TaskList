@@ -30,6 +30,7 @@ public class Startup {
         var builder = new ConfigurationBuilder();
         builder.SetBasePath(Directory.GetCurrentDirectory());
         builder.AddJsonFile("appsettings.json");
+        builder.AddEnvironmentVariables();
 
         var connectionString = Configuration.TryGetEnvironmentSetting("Postgres");
         services.AddEntityFrameworkNpgsql()
@@ -37,23 +38,24 @@ public class Startup {
 
         services.AddControllers();
         
-        var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
-            //.GetProperty("id");
-            var v = swaggerOptions.GetProperty("Version");
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc(Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value, new OpenApiInfo
-            {
-                Version = Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value,
-                Title = Configuration.GetSection(swaggerOptions.GetProperty("Title").ToString()).Value,
-                Description = Configuration.GetSection(swaggerOptions.GetProperty("Description").ToString()).Value
-            });
-        });
+        //var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
+        //    //.GetProperty("id");
+        //    var v = swaggerOptions.GetProperty("Version");
+        //services.AddSwaggerGen(c =>
+        //{
+        //    c.SwaggerDoc(Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value, new OpenApiInfo
+        //    {
+        //        Version = Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value,
+        //        Title = Configuration.GetSection(swaggerOptions.GetProperty("Title").ToString()).Value,
+        //        Description = Configuration.GetSection(swaggerOptions.GetProperty("Description").ToString()).Value
+        //    });
+        //});
 
         services.AddAutoMapper(typeof(TaskAutoMapperProfile));
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IRepository<Domain.Model.Task>, TaskRepository>();
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
         if (app.Environment.IsDevelopment())
