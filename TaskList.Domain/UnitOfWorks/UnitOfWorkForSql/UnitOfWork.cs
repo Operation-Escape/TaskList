@@ -1,5 +1,5 @@
 ﻿using TaskList.Domain.UnitOfWorks.Abstract;
-using TaskModel = TaskList.Domain.Model.Task;
+//using TaskModel = TaskList.Domain.Models.Task;
 
 namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
 {
@@ -7,12 +7,12 @@ namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
     {
         private readonly SqlContext _db;
 
-        public IRepository<TaskModel> Task { get; set; }
+        //public IRepository<TaskModel> TaskModel { get; set; }
 
-        public UnitOfWork(SqlContext db, IRepository<TaskModel> taskRepository)
+        public UnitOfWork(SqlContext db/*, IRepository<TaskModel> taskRepository*/)
         {
             _db = db;
-            Task = taskRepository;
+            //TaskModel = taskRepository;
         }
 
         public void Dispose()
@@ -21,10 +21,10 @@ namespace TaskList.Domain.UnitOfWorks.UnitOfWorkForSql
             GC.SuppressFinalize(this);
         }
 
-        public bool Commit()
+        public Task<bool> Commit()
         {
             var res = _db.SaveChanges();
-            return res > 0;
+            return Task.FromResult(res > 0);
         }
     }
 }

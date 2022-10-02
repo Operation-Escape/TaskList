@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {}
+    "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {}
   },
   "projects": {
-    "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {
+    "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj",
+        "projectUniqueName": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj",
         "projectName": "TaskList.Application",
-        "projectPath": "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj",
-        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
-        "outputPath": "C:\\TaskList\\TaskList\\TaskList.Application\\obj\\",
+        "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj",
+        "packagesPath": "C:\\Users\\vanku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\vanku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Oleg\\Desktop\\Trino": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://energysuite.pkgs.visualstudio.com/_packaging/UtilySuiteShared/nuget/v3/index.json": {}
         },
@@ -34,11 +29,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
-                "projectPath": "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj"
+              "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
+                "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj"
               },
-              "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj": {
-                "projectPath": "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj"
+              "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj": {
+                "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj"
               }
             }
           }
@@ -64,7 +59,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -73,25 +69,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
+    "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj",
         "projectName": "TaskList.Domain",
-        "projectPath": "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj",
-        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
-        "outputPath": "C:\\TaskList\\TaskList\\TaskList.Domain\\obj\\",
+        "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj",
+        "packagesPath": "C:\\Users\\vanku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\vanku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -99,7 +91,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Oleg\\Desktop\\Trino": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://energysuite.pkgs.visualstudio.com/_packaging/UtilySuiteShared/nuget/v3/index.json": {}
         },
@@ -107,8 +98,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj": {
-                "projectPath": "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj"
+              "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj": {
+                "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj"
               }
             }
           }
@@ -126,6 +117,30 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.17.1, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[6.0.7, )"
             }
           },
           "imports": [
@@ -134,7 +149,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -143,25 +159,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj": {
+    "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
+        "projectUniqueName": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
         "projectName": "TaskList.Dto",
-        "projectPath": "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
-        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
-        "outputPath": "C:\\TaskList\\TaskList\\TaskList.Dto\\obj\\",
+        "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
+        "packagesPath": "C:\\Users\\vanku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\vanku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -169,7 +181,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Oleg\\Desktop\\Trino": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://energysuite.pkgs.visualstudio.com/_packaging/UtilySuiteShared/nuget/v3/index.json": {}
         },
@@ -194,7 +205,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -203,25 +215,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj": {
+    "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj",
+        "projectUniqueName": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj",
         "projectName": "TaskList.Shared.Common",
-        "projectPath": "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj",
-        "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
-        "outputPath": "C:\\TaskList\\TaskList\\TaskList.Shared.Common\\obj\\",
+        "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\TaskList.Shared.Common.csproj",
+        "packagesPath": "C:\\Users\\vanku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Shared.Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\vanku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -229,7 +237,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Oleg\\Desktop\\Trino": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://energysuite.pkgs.visualstudio.com/_packaging/UtilySuiteShared/nuget/v3/index.json": {}
         },
@@ -268,7 +275,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -277,7 +285,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
         }
       }
     }
