@@ -12,7 +12,7 @@ public class SqlTaskRepository : SqlRepository<TaskModel, int>, ITaskRepository
     {
     }
 
-    public async Task<IEnumerable<TaskModel>> GetLimitedTasksAsync(int? skip, int? limit, int orderDirection)
+    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, int orderDirection)
     {
         var query = DbSet.AsQueryable();
         

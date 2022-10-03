@@ -19,7 +19,7 @@ public class TaskReaderLogic : ITaskReaderLogic
 
     public async Task<List<TaskDto>> GetAllAsync(TaskSearchFilter filter)
     {
-        var tasks = await _unitOfWork.Tasks.GetLimitedTasksAsync(filter.Limit, filter.Skip, filter.OrderType);
+        var tasks = await _unitOfWork.Tasks.GetAllAsync(filter.Limit, filter.Skip, filter.OrderType);
         
         return _mapper.Map<List<TaskDto>>(tasks);
     }

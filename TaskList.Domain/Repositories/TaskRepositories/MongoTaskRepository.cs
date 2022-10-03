@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using TaskList.Domain.Contexts.Abstract;
 using TaskList.Domain.Repositories.Abstract;
-using MongoDB.Driver;
 using TaskList.Dto.Enums;
 using TaskModel = TaskList.Domain.Models.Task;
 
@@ -13,7 +12,7 @@ public class MongoTaskRepository : MongoRepository<TaskModel, int>, ITaskReposit
     {
     }
 
-    public async Task<IEnumerable<TaskModel>> GetLimitedTasksAsync(int? skip, int? limit, int orderDirection)
+    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, int orderDirection)
     {
         var query = DbSet.Find(Builders<TaskModel>.Filter.Empty);
 
