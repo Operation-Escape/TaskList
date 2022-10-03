@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using TaskList.Dto.Task;
+using TaskList.Dto.Task.Commands;
+using TaskList.Dto.Task.Queries;
 using TaskModel = TaskList.Domain.Models.Task;
 
 namespace TaskList.Application.AutoMapperProfiles;

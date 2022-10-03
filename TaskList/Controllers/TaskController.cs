@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SerilogTimings;
 using TaskList.Application.Abstract;
 using TaskList.Dto.Task;
+using TaskList.Dto.Task.Commands;
+using TaskList.Dto.Task.Queries;
 
 namespace TaskList.Api.Controllers;
 

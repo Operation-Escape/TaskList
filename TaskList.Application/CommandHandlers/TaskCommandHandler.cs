@@ -4,6 +4,7 @@ using TaskList.Domain.UnitOfWorks;
 using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Dto.Enums;
 using TaskList.Dto.Task;
+using TaskList.Dto.Task.Commands;
 using TaskModel = TaskList.Domain.Models.Task;
 
 namespace TaskList.Application.CommandHandlers;

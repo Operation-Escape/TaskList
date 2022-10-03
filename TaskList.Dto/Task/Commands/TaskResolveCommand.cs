@@ -1,6 +1,6 @@
-﻿namespace TaskList.Dto.Task;
+﻿namespace TaskList.Dto.Task.Commands;
 
-public class TaskResolveRequest
+public class TaskResolveCommand
 {
     /// <summary>
     /// Completed time for work

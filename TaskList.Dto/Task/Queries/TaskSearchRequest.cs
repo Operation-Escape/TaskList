@@ -1,6 +1,6 @@
-﻿namespace TaskList.Dto.Task;
+﻿namespace TaskList.Dto.Task.Queries;
 
-public class TaskSearchFilter
+public class TaskSearchRequest
 {
     /// <summary>
     /// Skip of Task

@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TaskList.Dto.Enums;
+﻿namespace TaskList.Dto.Task.Commands;
 
-namespace TaskList.Dto.Task;
-
-public class TaskCreateUpdateRequest
+public class TaskCreateUpdateCommand
 {
     /// <summary>
     /// Id
@@ -12,12 +9,10 @@ public class TaskCreateUpdateRequest
     /// <summary>
     /// Name
     /// </summary>
-    [StringLength(255, MinimumLength = 1)]
     public string Name { get; set; }
     /// <summary>
     /// State, ETaskState
     /// </summary>
-    [EnumDataType(typeof(ETaskState))]
     public int State { get; set; }
     /// <summary>
     /// Description
