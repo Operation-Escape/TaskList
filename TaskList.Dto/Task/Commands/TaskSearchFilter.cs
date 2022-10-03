@@ -1,6 +1,8 @@
-﻿namespace TaskList.Dto.Task.Commands;
+﻿using TaskList.Dto.Task.Validation;
 
-public class TaskSearchFilter
+namespace TaskList.Dto.Task.Commands;
+
+public class TaskSearchFilter : Command
 {
     /// <summary>
     /// Skip of Task
@@ -14,4 +16,13 @@ public class TaskSearchFilter
     /// Sort direction, EOrderType
     /// </summary>
     public int OrderType { get; set; }
+
+    public override bool IsValid()
+    {
+        ValidationResult = new TaskSearchFilterValidator<TaskSearchFilter>().Validate(this);
+        if (!ValidationResult.IsValid)
+            throw new ArgumentException(ValidationResult.ToString());
+
+        return true;
+    }
 }
