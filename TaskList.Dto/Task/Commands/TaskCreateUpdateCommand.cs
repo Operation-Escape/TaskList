@@ -1,6 +1,8 @@
-﻿namespace TaskList.Dto.Task.Commands;
+﻿using TaskList.Dto.Task.Validation;
 
-public class TaskCreateUpdateCommand
+namespace TaskList.Dto.Task.Commands;
+
+public class TaskCreateUpdateCommand : Command
 {
     /// <summary>
     /// Id
@@ -30,4 +32,13 @@ public class TaskCreateUpdateCommand
     /// Completed time for work
     /// </summary>
     public decimal? CompletedWork { get; set; }
+
+    public override bool IsValid()
+    {
+        ValidationResult = new TaskCreateUpdateCommandValidator<TaskCreateUpdateCommand>().Validate(this);
+        if (!ValidationResult.IsValid)
+            throw new ArgumentException(ValidationResult.ToString());
+
+        return true;
+    }
 }
