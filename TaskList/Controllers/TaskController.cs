@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SerilogTimings;
 using TaskList.Application.Abstract;
 using TaskList.Dto.Task;
@@ -11,19 +12,23 @@ public class TaskController : Controller
 {
     private readonly ITaskReaderLogic _readerLogic;
     private readonly ITaskCommandHandler _commandHandler;
-    public TaskController(ITaskReaderLogic readerLogic, ITaskCommandHandler commandHandler)
+    private readonly IMapper _mapper;
+    
+    public TaskController(ITaskReaderLogic readerLogic, ITaskCommandHandler commandHandler, IMapper mapper)
     {
         _readerLogic = readerLogic;
         _commandHandler = commandHandler;
+        _mapper = mapper;
     }
     
     /// <summary>
     /// Get Task
     /// </summary>
     [HttpGet]
-    public async Task<ActionResult> GetAllAsync([FromQuery]TaskSearchFilter filter)
+    public async Task<ActionResult> GetAllAsync([FromQuery]TaskSearchRequest request)
     {
         using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("get all tasks");
+        var filter = _mapper.Map<TaskSearchFilter>(request);
         var result = await _readerLogic.GetAllAsync(filter);
         return Ok(result);
     }
@@ -32,7 +37,7 @@ public class TaskController : Controller
     /// Get Task /Task/5
     /// </summary>
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetTaskAsync(Guid id)
+    public async Task<ActionResult> GetTaskAsync(int id)
     {
         using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("get task with id {0}", id);
         var result = await _readerLogic.GetByIdAsync(id);
@@ -43,10 +48,11 @@ public class TaskController : Controller
     /// Insert Task /Task
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult> InsertTaskAsync([FromBody]TaskCreateUpdateCommand cmd)
+    public async Task<ActionResult> InsertTaskAsync([FromBody]TaskCreateUpdateRequest request)
     {
-        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("create task with body {0}", cmd);
-        if (cmd == null)
+        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("create task with body {0}", request);
+        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
+        if (request == null)
             return BadRequest();
         await _commandHandler.InsertAsync(cmd);
         return Ok();
@@ -56,9 +62,10 @@ public class TaskController : Controller
     /// Update Task /Task/5
     /// </summary>
     [HttpPatch("{id}")]
-    public async Task<ActionResult> UpdateTaskAsync(Guid id, [FromBody]TaskCreateUpdateCommand cmd)
+    public async Task<ActionResult> UpdateTaskAsync(int id, [FromBody]TaskCreateUpdateRequest request)
     {
-        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, cmd);
+        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, request);
+        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
         if (cmd == null)
             return BadRequest();
         cmd.Id = id;
@@ -70,9 +77,10 @@ public class TaskController : Controller
     /// Full Update Task /Task/5
     /// </summary>
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateTaskFullAsync(Guid id, [FromBody]TaskCreateUpdateCommand cmd)
+    public async Task<ActionResult> UpdateTaskFullAsync(int id, [FromBody]TaskCreateUpdateRequest request)
     {
-        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, cmd);
+        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, request);
+        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
         if (cmd == null)
             return BadRequest();
         cmd.Id = id;
@@ -84,9 +92,10 @@ public class TaskController : Controller
     /// resolve Task /Task/resolve
     /// </summary>
     [HttpPatch("{id}/resolve")]
-    public async Task<ActionResult> ResolveTaskAsync(Guid id, [FromBody]TaskResolveCommand cmd)
+    public async Task<ActionResult> ResolveTaskAsync(int id, [FromBody]TaskResolveRequest request)
     {
-        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("resolve task with id {0} and body {1}", id, cmd);
+        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("resolve task with id {0} and body {1}", id, request);
+        var cmd = _mapper.Map<TaskResolveCommand>(request);
         await _commandHandler.ResolveTaskAsync(id, cmd);
         return Ok();
     }
@@ -95,7 +104,7 @@ public class TaskController : Controller
     /// delete Task /Task/5
     /// </summary>
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteTaskAsync(Guid id)
+    public async Task<ActionResult> DeleteTaskAsync(int id)
     {
         using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("delete task with id {0}", id);
         await _commandHandler.DeleteAsync(id);

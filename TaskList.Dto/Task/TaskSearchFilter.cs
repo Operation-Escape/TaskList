@@ -13,5 +13,5 @@ public class TaskSearchFilter
     /// <summary>
     /// Sort direction, EOrderType
     /// </summary>
-    public int CreatedDateTimeOrder { get; set; }
+    public int OrderType { get; set; }
 }

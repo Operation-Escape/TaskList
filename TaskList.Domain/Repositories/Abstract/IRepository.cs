@@ -1,8 +1,8 @@
 ﻿using TaskList.Domain.Models.Abstract;
 
-namespace TaskList.Domain.UnitOfWorks.Abstract;
+namespace TaskList.Domain.Repositories.Abstract;
 
-public interface IRepository<TEntity, TKey> : IDisposable where TEntity : IModel<TKey>
+public interface IRepository<TEntity, TKey> : IDisposable where TEntity : SimpleDomainModel<TKey>
 {
     Task AddAsync(TEntity obj);
     Task<TEntity> GetByIdAsync(TKey id);

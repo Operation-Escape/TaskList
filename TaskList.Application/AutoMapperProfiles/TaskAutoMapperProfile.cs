@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TaskList.Dto.Task;
-using TaskModel = TaskList.Domain.Model.Task;
+using TaskModel = TaskList.Domain.Models.Task;
 
 namespace TaskList.Application.AutoMapperProfiles;
 
@@ -10,5 +10,8 @@ public class TaskAutoMapperProfile : Profile
     {
         CreateMap<TaskModel, TaskDto>();
         CreateMap<TaskCreateUpdateCommand, TaskModel>();
+        CreateMap<TaskSearchRequest, TaskSearchFilter>();
+        CreateMap<TaskCreateUpdateRequest, TaskCreateUpdateCommand>();
+        CreateMap<TaskResolveRequest, TaskResolveCommand>();
     }
 }

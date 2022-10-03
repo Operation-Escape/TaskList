@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace TaskList.Domain.UnitOfWorks.MongoRepository.Abstract
+namespace TaskList.Domain.Contexts.Abstract
 {
     public interface IMongoContext : IDisposable
     {

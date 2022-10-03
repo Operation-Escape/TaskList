@@ -3,7 +3,7 @@ using TaskList.Dto.Enums;
 
 namespace TaskList.Dto.Task;
 
-public class TaskDto
+public class TaskCreateUpdateRequest
 {
     /// <summary>
     /// Id
@@ -12,15 +12,13 @@ public class TaskDto
     /// <summary>
     /// Name
     /// </summary>
+    [StringLength(255, MinimumLength = 1)]
     public string Name { get; set; }
     /// <summary>
-    /// State, ETaskStatus
+    /// State, ETaskState
     /// </summary>
+    [EnumDataType(typeof(ETaskState))]
     public int State { get; set; }
-    /// <summary>
-    /// Created date time
-    /// </summary>
-    public DateTime DateTimeCreated { get; set; } = DateTime.Now;
     /// <summary>
     /// Description
     /// </summary>

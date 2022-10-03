@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using TaskList.Domain.UnitOfWorks.MongoRepository.Abstract;
+using TaskList.Domain.Contexts.Abstract;
 
-namespace TaskList.Domain.UnitOfWorks.MongoRepository.Context
+namespace TaskList.Domain.Contexts
 {
     public class MongoContext : IMongoContext
     {

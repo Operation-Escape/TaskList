@@ -2,7 +2,7 @@
 
 namespace TaskList.Domain.Models.Abstract
 {
-    public abstract class MongoDomainModel<T> : IModel<T>
+    public abstract class SimpleDomainModel<T>
     {
         [BsonId]
         [BsonIgnoreIfDefault]

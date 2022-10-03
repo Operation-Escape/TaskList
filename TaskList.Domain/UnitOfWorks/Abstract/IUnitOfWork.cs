@@ -1,7 +1,8 @@
 ﻿namespace TaskList.Domain.UnitOfWorks.Abstract;
+using TaskList.Domain.Repositories.Abstract;
 
 public interface IUnitOfWork : IDisposable
 {
-    //IRepository<TaskList.Domain.Model.Task> Task { get; set; }
-    Task<bool> Commit();
+    ITaskRepository Tasks { get; set; }
+    Task<bool> SaveChangesAsync();
 }

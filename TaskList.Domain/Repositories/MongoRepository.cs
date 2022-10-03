@@ -1,25 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using TaskList.Domain.Contexts.Abstract;
 using TaskList.Domain.Models.Abstract;
-using TaskList.Domain.UnitOfWorks.Abstract;
-using TaskList.Domain.UnitOfWorks.MongoRepository.Abstract;
+using TaskList.Domain.Repositories.Abstract;
 
-namespace TaskList.Domain.UnitOfWorks.MongoRepository
+namespace TaskList.Domain.Repositories
 {
-    public class MongoRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : IModel<TKey>
+    public class MongoRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : SimpleDomainModel<TKey>
     {
-        protected readonly IMongoContext Context;
+        private readonly IMongoContext _context;
         protected readonly IMongoCollection<TEntity> DbSet;
 
         protected MongoRepository(IMongoContext context)
         {
-            Context = context;
-            DbSet = Context.GetCollection<TEntity>(typeof(TEntity).Name);
+            _context = context;
+            DbSet = _context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
         public Task AddAsync(TEntity obj)
         {
-            Context.AddCommand(() => DbSet.InsertOneAsync(obj));
+            _context.AddCommand(() => DbSet.InsertOneAsync(obj));
             return Task.CompletedTask;
         }
 
@@ -37,19 +36,19 @@ namespace TaskList.Domain.UnitOfWorks.MongoRepository
 
         public Task RemoveAsync(TKey id)
         {
-            Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
+            _context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
             return Task.CompletedTask;
         }
 
         public Task UpdateAsync(TEntity obj)
         {
-            Context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
+            _context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
             return Task.CompletedTask;
         }
 
         public void Dispose()
         {
-            Context?.Dispose();
+            _context?.Dispose();
             GC.SuppressFinalize(this);
         }
     }

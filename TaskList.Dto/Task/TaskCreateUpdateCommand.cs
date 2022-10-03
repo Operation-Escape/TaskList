@@ -8,7 +8,7 @@ public class TaskCreateUpdateCommand
     /// <summary>
     /// Id
     /// </summary>
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     /// <summary>
     /// Name
     /// </summary>

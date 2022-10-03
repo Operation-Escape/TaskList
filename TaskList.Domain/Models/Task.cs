@@ -1,9 +1,8 @@
-﻿using MongoDB.Bson;
-using TaskList.Domain.Models.Abstract;
+﻿using TaskList.Domain.Models.Abstract;
 
-namespace TaskList.Domain.Models.Mongo
+namespace TaskList.Domain.Models
 {
-    public class Task : MongoDomainModel<ObjectId>
+    public class Task : SimpleDomainModel<int>
     {
         /// <summary>
         /// Name
@@ -33,5 +32,18 @@ namespace TaskList.Domain.Models.Mongo
         /// Completed time for work
         /// </summary>
         public decimal? CompletedWork { get; private set; }
+        
+        // Empty constructor for EF
+        protected Task() { }
+
+        public Task(string name, int state, string description, decimal orginalEstimate, decimal remainingWork, decimal completedWork)
+        {
+            Name = name;
+            State = state;
+            Description = description;
+            OrginalEstimate = orginalEstimate;
+            RemainingWork = remainingWork;
+            CompletedWork = completedWork;
+        }
     }
 }
