@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using TaskList.Dto.Enums;
 using TaskList.Dto.Task.Commands;
 
 namespace TaskList.Dto.Task.Validation
@@ -25,8 +24,7 @@ namespace TaskList.Dto.Task.Validation
         protected void ValidateStateValue()
         {
             RuleFor(c => c.State)
-                .GreaterThanOrEqualTo((int)ETaskState.Proposed)
-                .LessThanOrEqualTo((int)ETaskState.Closed)
+                .IsInEnum()
                 .WithMessage("Please, enter order task state value in correct range");
         }
 
