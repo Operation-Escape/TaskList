@@ -16,10 +16,9 @@ namespace TaskList.Domain.Repositories
             DbSet = _context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public Task AddAsync(TEntity obj)
+        public void Add(TEntity obj)
         {
             _context.AddCommand(() => DbSet.InsertOneAsync(obj));
-            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -28,22 +27,20 @@ namespace TaskList.Domain.Repositories
             return all.ToList();
         }
 
-        public async Task<TEntity> GetByIdAsync(TKey id)
+        public async Task<TEntity?> GetByIdAsync(TKey id)
         {
             var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id));
             return data.SingleOrDefault();
         }
 
-        public Task RemoveAsync(TKey id)
+        public void Remove(TKey id)
         {
             _context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
-            return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(TEntity obj)
+        public void Update(TEntity obj)
         {
             _context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
-            return Task.CompletedTask;
         }
 
         public void Dispose()

@@ -1,4 +1,5 @@
-﻿using TaskList.Domain.Models.Abstract;
+﻿using MongoDB.Driver.Core.Servers;
+using TaskList.Domain.Models.Abstract;
 
 namespace TaskList.Domain.Models
 {
@@ -44,6 +45,21 @@ namespace TaskList.Domain.Models
             OrginalEstimate = orginalEstimate;
             RemainingWork = remainingWork;
             CompletedWork = completedWork;
+        }
+
+        public void SetState(int state)
+        {
+            State = state;
+        }
+        
+        public void SetCompletedWork(decimal? completedWork)
+        {
+            CompletedWork = completedWork;
+        }
+        
+        public void SetRemainingWork(decimal? remainingWork)
+        {
+            RemainingWork = remainingWork;
         }
     }
 }

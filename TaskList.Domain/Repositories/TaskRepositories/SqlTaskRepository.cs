@@ -26,8 +26,6 @@ public class SqlTaskRepository : SqlRepository<TaskModel, int>, ITaskRepository
         if(limit.HasValue)
             query = query.Take(limit.Value);
 
-        var tasks = await query.ToListAsync();
-
-        return tasks;
+        return await query.ToListAsync();
     }
 }

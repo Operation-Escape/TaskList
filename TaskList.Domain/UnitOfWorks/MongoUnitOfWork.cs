@@ -1,9 +1,7 @@
-﻿using TaskList.Domain.Contexts;
-using TaskList.Domain.Contexts.Abstract;
+﻿using TaskList.Domain.Contexts.Abstract;
 using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Domain.Repositories.Abstract;
 using TaskList.Domain.Repositories.TaskRepositories;
-using Task = TaskList.Domain.Models.Task;
 
 namespace TaskList.Domain.UnitOfWorks
 {

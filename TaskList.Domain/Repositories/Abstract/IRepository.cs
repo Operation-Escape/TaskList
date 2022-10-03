@@ -4,9 +4,9 @@ namespace TaskList.Domain.Repositories.Abstract;
 
 public interface IRepository<TEntity, TKey> : IDisposable where TEntity : SimpleDomainModel<TKey>
 {
-    Task AddAsync(TEntity obj);
-    Task<TEntity> GetByIdAsync(TKey id);
+    void Add(TEntity obj);
+    Task<TEntity?> GetByIdAsync(TKey id);
     Task<IEnumerable<TEntity>> GetAllAsync();
-    Task UpdateAsync(TEntity obj);
-    Task RemoveAsync(TKey id);
+    void Update(TEntity obj);
+    void Remove(TKey id);
 }

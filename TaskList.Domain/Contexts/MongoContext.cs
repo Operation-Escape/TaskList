@@ -20,18 +20,20 @@ namespace TaskList.Domain.Contexts
 
         public async Task<int> SaveChangesAsync()
         {
-            ConfigureMongo();
+            //ConfigureMongo();
 
-            using (Session = await MongoClient.StartSessionAsync())
-            {
-                Session.StartTransaction();
-
-                var commandTasks = _commands.Select(c => c());
-
-                await Task.WhenAll(commandTasks);
-
-                await Session.CommitTransactionAsync();
-            }
+            // using (Session = await MongoClient.StartSessionAsync())
+            // {
+            //     Session.StartTransaction();
+            //
+            //     var commandTasks = _commands.Select(c => c());
+            //
+            //     await Task.WhenAll(commandTasks);
+            //
+            //     await Session.CommitTransactionAsync();
+            // }
+            var commandTasks = _commands.Select(command => command());
+            await Task.WhenAll(commandTasks);
 
             return _commands.Count;
         }

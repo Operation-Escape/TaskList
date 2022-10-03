@@ -6,14 +6,12 @@ using TaskList.Application.ReaderLogics;
 using TaskList.Domain.Contexts;
 using TaskList.Domain.Contexts.Abstract;
 using TaskList.Domain.Repositories;
-using TaskList.Domain.Repositories.Abstract;
 using TaskList.Domain.Repositories.TaskRepositories;
 using TaskList.Domain.UnitOfWorks;
-using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Shared.Common.Extensions;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
-using TaskList.Api.Exceptions;
+using Microsoft.OpenApi.Models;
+using TaskList.Api.Middleware;
+using TaskList.Shared.Common.Swagger;
 
 namespace TaskList.Api;
 
@@ -26,6 +24,9 @@ public class Startup {
     public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services) {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        services.AddControllers();
+        
         services.AddCors(o => o.AddPolicy("TaskListCors", builder =>
         {
             builder.AllowAnyOrigin()
@@ -37,49 +38,50 @@ public class Startup {
         builder.SetBasePath(Directory.GetCurrentDirectory());
         builder.AddJsonFile("appsettings.json");
         builder.AddEnvironmentVariables();
-
+        
+        var swaggerConfig = ConfigModel.Bind(Configuration);
+        services.AddSwaggerGen(x =>
+        {
+            x.SwaggerDoc(swaggerConfig.SwaggerOptions.Version, new OpenApiInfo { Title = swaggerConfig.SwaggerOptions.Title, Version = swaggerConfig.SwaggerOptions.Version });
+        });
+        
+        services.AddAutoMapper(typeof(TaskAutoMapperProfile));
+        
         var connectionString = Configuration.TryGetEnvironmentSetting("Postgres");
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
         services.AddScoped<IMongoContext, MongoContext>();
+        
+        services.AddScoped(typeof(MongoRepository<,>));
+        services.AddScoped(typeof(SqlRepository<,>));
+        
+        services.AddScoped(typeof(MongoRepository<,>));
+        services.AddScoped(typeof(SqlRepository<,>));
 
-        services.AddControllers();
+        services.AddScoped<MongoTaskRepository>();
+        services.AddScoped<SqlTaskRepository>();
 
-        services.AddScoped(typeof(IRepository<,>), typeof(MongoRepository<,>));
-        services.AddScoped(typeof(IRepository<,>), typeof(SqlRepository<,>));
+        services.AddScoped<MongoUnitOfWork>();
+        services.AddScoped<SqlUnitOfWork>();
 
-        services.AddScoped<ITaskRepository, MongoTaskRepository>();
-        services.AddScoped<ITaskRepository, SqlTaskRepository>();
-
-        services.AddScoped<IUnitOfWork, MongoUnitOfWork>();
-        services.AddScoped<IUnitOfWork, SqlUnitOfWork>();
-
-        //var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
-        //    //.GetProperty("id");
-        //    var v = swaggerOptions.GetProperty("Version");
-        //services.AddSwaggerGen(c =>
-        //{
-        //    c.SwaggerDoc(Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value, new OpenApiInfo
-        //    {
-        //        Version = Configuration.GetSection(swaggerOptions.GetProperty("Version").ToString()).Value,
-        //        Title = Configuration.GetSection(swaggerOptions.GetProperty("Title").ToString()).Value,
-        //        Description = Configuration.GetSection(swaggerOptions.GetProperty("Description").ToString()).Value
-        //    });
-        //});
-
-        services.AddAutoMapper(typeof(TaskAutoMapperProfile));
         services.AddScoped<ITaskReaderLogic, TaskReaderLogic>();
         services.AddScoped<ITaskCommandHandler, TaskCommandHandler>();
     }
     public void Configure(WebApplication app, IWebHostEnvironment env) {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var dataContext = scope.ServiceProvider.GetRequiredService<SqlContext>();
+            dataContext.Database.Migrate();
+        }
         app.UseMiddleware<ExceptionMiddleware>();
-        app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
         app.Run();

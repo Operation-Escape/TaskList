@@ -8,7 +8,7 @@ namespace TaskList.Domain.Repositories.TaskRepositories;
 
 public class MongoTaskRepository : MongoRepository<TaskModel, int>, ITaskRepository
 {
-    protected MongoTaskRepository(IMongoContext context) : base(context)
+    public MongoTaskRepository(IMongoContext context) : base(context)
     {
     }
 

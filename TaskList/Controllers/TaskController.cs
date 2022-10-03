@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SerilogTimings;
 using TaskList.Application.Abstract;
-using TaskList.Dto.Task;
 using TaskList.Dto.Task.Commands;
 using TaskList.Dto.Task.Queries;
 
@@ -53,9 +52,9 @@ public class TaskController : Controller
     public async Task<ActionResult> InsertTaskAsync([FromBody]TaskCreateUpdateRequest request)
     {
         using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("create task with body {0}", request);
-        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
         if (request == null)
             return BadRequest();
+        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
         await _commandHandler.InsertAsync(cmd);
         return Ok();
     }
@@ -63,7 +62,7 @@ public class TaskController : Controller
     /// <summary>
     /// Update Task /Task/5
     /// </summary>
-    [HttpPatch("{id}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult> UpdateTaskAsync(int id, [FromBody]TaskCreateUpdateRequest request)
     {
         using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, request);
@@ -74,22 +73,7 @@ public class TaskController : Controller
         await _commandHandler.UpdateAsync(cmd);
         return Ok();
     }
-    
-    /// <summary>
-    /// Full Update Task /Task/5
-    /// </summary>
-    [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateTaskFullAsync(int id, [FromBody]TaskCreateUpdateRequest request)
-    {
-        using var op = Operation.At(Serilog.Events.LogEventLevel.Debug).Begin("update task with id {0} and body {1}", id, request);
-        var cmd = _mapper.Map<TaskCreateUpdateCommand>(request);
-        if (cmd == null)
-            return BadRequest();
-        cmd.Id = id;
-       // await _commandHandler.UpdateFullAsync(cmd);
-        return Ok();
-    }
-    
+
     /// <summary>
     /// resolve Task /Task/resolve
     /// </summary>

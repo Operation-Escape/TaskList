@@ -22,9 +22,9 @@ namespace TaskList.Domain.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public async Task AddAsync(TEntity model)
+        public void Add(TEntity model)
         {
-            await DbSet.AddAsync(model);
+            DbSet.Add(model);
         }
 
         public async Task<TEntity?> GetByIdAsync(TKey id) => await DbSet.FindAsync(id);
@@ -34,17 +34,14 @@ namespace TaskList.Domain.Repositories
             return await DbSet.ToListAsync();
         }
 
-        public Task UpdateAsync(TEntity model)
+        public void Update(TEntity model)
         {
             DbSet.Update(model);
-            return Task.CompletedTask;
         }
 
-        public async Task RemoveAsync(TKey id)
+        public void Remove(TKey id)
         {
-            var model = await DbSet.FindAsync(id);
-            if (model != null)
-                DbSet.Remove(model);
+            DbSet.Remove(DbSet.Find(id));
         }
     }
 }

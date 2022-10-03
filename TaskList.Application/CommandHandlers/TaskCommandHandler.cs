@@ -3,7 +3,6 @@ using TaskList.Application.Abstract;
 using TaskList.Domain.UnitOfWorks;
 using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Dto.Enums;
-using TaskList.Dto.Task;
 using TaskList.Dto.Task.Commands;
 using TaskModel = TaskList.Domain.Models.Task;
 
@@ -23,34 +22,33 @@ public class TaskCommandHandler : ITaskCommandHandler
     public async Task UpdateAsync(TaskCreateUpdateCommand cmd)
     {
         var task = _mapper.Map<TaskModel>(cmd);
-        await _unitOfWork.Tasks.UpdateAsync(task);
+        _unitOfWork.Tasks.Update(task);
         await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
     {
-        await _unitOfWork.Tasks.RemoveAsync(id);
+        _unitOfWork.Tasks.Remove(id);
         await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task InsertAsync(TaskCreateUpdateCommand cmd)
     {
         var newTask = _mapper.Map<TaskModel>(cmd);
-        await _unitOfWork.Tasks.AddAsync(newTask);
+        _unitOfWork.Tasks.Add(newTask);
         await _unitOfWork.SaveChangesAsync();
     }
     
     public async Task ResolveTaskAsync(int id, TaskResolveCommand cmd)
     {
-        var updateCommand = new TaskCreateUpdateCommand
-        {
-            Id = id,
-            State = (int)ETaskState.Resolved,
-            CompletedWork = cmd.CompletedWork,
-            RemainingWork = 0
-        };
-        var task = _mapper.Map<TaskModel>(updateCommand);
-        await _unitOfWork.Tasks.UpdateAsync(task);
+        var task = await _unitOfWork.Tasks.GetByIdAsync(id);
+        if (task == null)
+            return;
+        task.SetState((int)ETaskState.Resolved);
+        task.SetCompletedWork(cmd.CompletedWork);
+        task.SetRemainingWork(0);
+        _unitOfWork.Tasks.Update(task);
+        await _unitOfWork.SaveChangesAsync();
         //TODO: pubilsh to mesasage broker about resolved task, for exmaple send email message
     }
 }

@@ -301,6 +301,22 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration.Binder/6.0.2-mauipre.1.22102.15": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22102.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration.FileExtensions/6.0.2-mauipre.1.22102.15": {
         "type": "package",
         "dependencies": {
@@ -1009,6 +1025,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "6.0.9",
           "MongoDB.Driver": "2.17.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.7",
+          "TaskList.Dto": "1.0.0",
           "TaskList.Shared.Common": "1.0.0"
         },
         "compile": {
@@ -1034,6 +1051,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22102.15",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22102.15",
           "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22102.15"
         },
         "compile": {
@@ -1408,6 +1426,25 @@
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.xml",
         "microsoft.extensions.configuration.abstractions.6.0.2-mauipre.1.22102.15.nupkg.sha512",
         "microsoft.extensions.configuration.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.Binder/6.0.2-mauipre.1.22102.15": {
+      "sha512": "d6JRnIwAnLS4FYF+KmMh4a3Y6d7qFokud7OY6TTZPx3yAp2dCj0fE73PbI3MvAyShmsGQi4EaSoybe1QrVpvXQ==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.binder/6.0.2-mauipre.1.22102.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Configuration.Binder.dll",
+        "lib/net461/Microsoft.Extensions.Configuration.Binder.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.xml",
+        "microsoft.extensions.configuration.binder.6.0.2-mauipre.1.22102.15.nupkg.sha512",
+        "microsoft.extensions.configuration.binder.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -2402,19 +2439,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vanku\\.nuget\\packages\\": {}
+    "C:\\Users\\Oleg\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList\\TaskList.Api.csproj",
+      "projectUniqueName": "C:\\TaskList\\TaskList\\TaskList\\TaskList.Api.csproj",
       "projectName": "TaskList.Api",
-      "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList\\TaskList.Api.csproj",
-      "packagesPath": "C:\\Users\\vanku\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList\\obj\\",
+      "projectPath": "C:\\TaskList\\TaskList\\TaskList\\TaskList.Api.csproj",
+      "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
+      "outputPath": "C:\\TaskList\\TaskList\\TaskList\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\vanku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Oleg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2422,6 +2464,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Users\\Oleg\\Desktop\\Trino": {},
         "https://api.nuget.org/v3/index.json": {},
         "https://energysuite.pkgs.visualstudio.com/_packaging/UtilySuiteShared/nuget/v3/index.json": {}
       },
@@ -2429,11 +2472,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {
-              "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Application\\TaskList.Application.csproj"
+            "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj": {
+              "projectPath": "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj"
             },
-            "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
-              "projectPath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj"
+            "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj": {
+              "projectPath": "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj"
             }
           }
         }
@@ -2481,8 +2524,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -2494,7 +2536,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400-preview.22330.6\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

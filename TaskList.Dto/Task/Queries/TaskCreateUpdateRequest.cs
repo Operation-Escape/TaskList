@@ -6,10 +6,6 @@ namespace TaskList.Dto.Task.Queries;
 public class TaskCreateUpdateRequest
 {
     /// <summary>
-    /// Id
-    /// </summary>
-    public int Id { get; set; }
-    /// <summary>
     /// Name
     /// </summary>
     [StringLength(255, MinimumLength = 1)]

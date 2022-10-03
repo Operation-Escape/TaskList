@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C4GUtG7FErA2q9b/iXk+Jce9eL4u9zSQYW8Isl2Alg2d4OCtg18bn8fzMIpvrT+PtwXfmFbFDuNCeVfQPFNxcQ==",
+  "dgSpecHash": "GrW7BgZ/CJ2TqYGXKa54XlsvNilmu905MCvJ8eS5xqlfZTmJUuxsWHDTTIQQmUXvElqmkLyplXyIZRQQ8AyRAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vanku\\Documents\\GitHub\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
+  "projectFilePath": "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

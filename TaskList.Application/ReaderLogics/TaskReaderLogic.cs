@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TaskList.Application.Abstract;
+using TaskList.Domain.UnitOfWorks;
 using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Dto.Task;
 using TaskList.Dto.Task.Commands;
@@ -12,7 +13,7 @@ public class TaskReaderLogic : ITaskReaderLogic
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     
-    public TaskReaderLogic(IUnitOfWork unitOfWork, IMapper mapper)
+    public TaskReaderLogic(MongoUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -20,8 +21,7 @@ public class TaskReaderLogic : ITaskReaderLogic
 
     public async Task<List<TaskDto>> GetAllAsync(TaskSearchFilter filter)
     {
-        var tasks = await _unitOfWork.Tasks.GetAllAsync(filter.Limit, filter.Skip, filter.OrderType);
-        
+        var tasks = await _unitOfWork.Tasks.GetAllAsync(filter.Skip, filter.Limit, filter.OrderType);
         return _mapper.Map<List<TaskDto>>(tasks);
     }
 
