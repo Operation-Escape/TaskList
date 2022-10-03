@@ -13,6 +13,7 @@ using TaskList.Domain.UnitOfWorks.Abstract;
 using TaskList.Shared.Common.Extensions;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using TaskList.Api.Exceptions;
 
 namespace TaskList.Api;
 
@@ -44,16 +45,16 @@ public class Startup {
         services.AddScoped<IMongoContext, MongoContext>();
 
         services.AddControllers();
-        
+
         services.AddScoped(typeof(IRepository<,>), typeof(MongoRepository<,>));
         services.AddScoped(typeof(IRepository<,>), typeof(SqlRepository<,>));
-        
+
         services.AddScoped<ITaskRepository, MongoTaskRepository>();
         services.AddScoped<ITaskRepository, SqlTaskRepository>();
-        
+
         services.AddScoped<IUnitOfWork, MongoUnitOfWork>();
         services.AddScoped<IUnitOfWork, SqlUnitOfWork>();
-        
+
         //var swaggerOptions = System.Text.Json.JsonDocument.Parse(Configuration.TryGetEnvironmentSetting("SwaggerOptions")).RootElement;
         //    //.GetProperty("id");
         //    var v = swaggerOptions.GetProperty("Version");
@@ -77,6 +78,7 @@ public class Startup {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseMiddleware<ExceptionMiddleware>();
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
