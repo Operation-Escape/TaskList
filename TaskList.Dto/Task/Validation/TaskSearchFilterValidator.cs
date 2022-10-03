@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using TaskList.Dto.Enums;
 using TaskList.Dto.Task.Commands;
 
 namespace TaskList.Dto.Task.Validation
@@ -32,8 +31,7 @@ namespace TaskList.Dto.Task.Validation
         protected void ValidateSortOrderDirectionValue()
         {
             RuleFor(c => c.OrderType)
-                .GreaterThanOrEqualTo((int)EOrderDirection.None)
-                .LessThanOrEqualTo((int)EOrderDirection.Descending)
+                .IsInEnum()
                 .WithMessage("Please, enter order direction value in correct range");
         }
     }
