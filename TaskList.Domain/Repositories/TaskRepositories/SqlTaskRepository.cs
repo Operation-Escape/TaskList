@@ -28,4 +28,10 @@ public class SqlTaskRepository : SqlRepository<TaskModel, int>, ITaskRepository
 
         return await query.ToListAsync();
     }
+
+    public override void Update(TaskModel model)
+    {
+        base.Update(model);
+        _context.Entry(model).Property(x => x.DateTimeCreated).IsModified = false;
+    }
 }

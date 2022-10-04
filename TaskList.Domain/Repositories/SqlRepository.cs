@@ -7,7 +7,7 @@ namespace TaskList.Domain.Repositories
 {
     public class SqlRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : SimpleDomainModel<TKey>
     {
-        private readonly SqlContext _context;
+        protected readonly SqlContext _context;
         protected readonly DbSet<TEntity> DbSet;
 
         public SqlRepository(SqlContext context)
@@ -34,7 +34,7 @@ namespace TaskList.Domain.Repositories
             return await DbSet.ToListAsync();
         }
 
-        public void Update(TEntity model)
+        public virtual void Update(TEntity model)
         {
             DbSet.Update(model);
         }
