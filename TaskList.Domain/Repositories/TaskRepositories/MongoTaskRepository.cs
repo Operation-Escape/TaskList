@@ -12,13 +12,13 @@ public class MongoTaskRepository : MongoRepository<TaskModel, int>, ITaskReposit
     {
     }
 
-    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, int orderDirection)
+    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, EOrderDirection orderDirection)
     {
         var query = DbSet.Find(Builders<TaskModel>.Filter.Empty);
 
-        if (orderDirection == (int)EOrderDirection.Ascending)
+        if (orderDirection == EOrderDirection.Ascending)
             query = query.Sort(Builders<TaskModel>.Sort.Ascending(x => x.Id));
-        else if (orderDirection == (int)EOrderDirection.Descending)
+        else if (orderDirection == EOrderDirection.Descending)
             query = query.Sort(Builders<TaskModel>.Sort.Descending(x => x.Id));
 
         if (skip.HasValue)

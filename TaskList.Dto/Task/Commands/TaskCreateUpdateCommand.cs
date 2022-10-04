@@ -1,4 +1,6 @@
-﻿using TaskList.Dto.Task.Validation;
+﻿using TaskList.Dto.Enums;
+using TaskList.Dto.Task.Commands.Abstract;
+using TaskList.Dto.Task.Validation;
 
 namespace TaskList.Dto.Task.Commands;
 
@@ -15,7 +17,7 @@ public class TaskCreateUpdateCommand : Command
     /// <summary>
     /// State, ETaskState
     /// </summary>
-    public int State { get; set; }
+    public ETaskState State { get; set; }
     /// <summary>
     /// Description
     /// </summary>
@@ -36,9 +38,7 @@ public class TaskCreateUpdateCommand : Command
     public override bool IsValid()
     {
         ValidationResult = new TaskCreateUpdateCommandValidator<TaskCreateUpdateCommand>().Validate(this);
-        if (!ValidationResult.IsValid)
-            throw new ArgumentException(ValidationResult.ToString());
 
-        return true;
+        return ValidationResult.IsValid;
     }
 }

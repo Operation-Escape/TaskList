@@ -1,52 +1,73 @@
 ﻿using MongoDB.Driver;
 using TaskList.Domain.Contexts.Abstract;
+using TaskList.Domain.Models;
 using TaskList.Domain.Models.Abstract;
 using TaskList.Domain.Repositories.Abstract;
+using Task = System.Threading.Tasks.Task;
 
 namespace TaskList.Domain.Repositories
 {
     public class MongoRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : SimpleDomainModel<TKey>
     {
-        private readonly IMongoContext _context;
+        protected readonly IMongoContext Context;
         protected readonly IMongoCollection<TEntity> DbSet;
 
         protected MongoRepository(IMongoContext context)
         {
-            _context = context;
-            DbSet = _context.GetCollection<TEntity>(typeof(TEntity).Name);
+            Context = context;
+            DbSet = Context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public void Add(TEntity obj)
+        public virtual async Task Add(TEntity obj)
         {
-            _context.AddCommand(() => DbSet.InsertOneAsync(obj));
+            obj.Id = await NextValue();
+            Context.AddCommand(() => DbSet.InsertOneAsync(obj));
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             var all = await DbSet.FindAsync(Builders<TEntity>.Filter.Empty);
             return all.ToList();
         }
 
-        public async Task<TEntity?> GetByIdAsync(TKey id)
+        public virtual async Task<TEntity?> GetByIdAsync(TKey id)
         {
             var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id));
             return data.SingleOrDefault();
         }
 
-        public void Remove(TKey id)
+        public virtual void Remove(TKey id)
         {
-            _context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
+            Context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, id)));
         }
 
-        public void Update(TEntity obj)
+        public virtual void Update(TEntity obj)
         {
-            _context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
+            Context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq(x => x.Id, obj.Id), obj));
         }
 
         public void Dispose()
         {
-            _context?.Dispose();
+            Context?.Dispose();
             GC.SuppressFinalize(this);
+        }
+
+        private async Task<TKey> NextValue(int reservationCount = 1)
+        {
+            var filter = Builders<Sequnce<TKey>>.Filter.Eq(x => x.Name, typeof(TEntity).Name);
+
+            var update = typeof(TKey) == typeof(long)
+                ? Builders<Sequnce<TKey>>.Update.Inc(nameof(Sequnce<TKey>.Value), (long)reservationCount)
+                : Builders<Sequnce<TKey>>.Update.Inc(nameof(Sequnce<TKey>.Value), reservationCount);
+
+            var opt = new FindOneAndUpdateOptions<Sequnce<TKey>> { IsUpsert = true, ReturnDocument = ReturnDocument.After };
+
+            var counterCol = Context.GetCollection<Sequnce<TKey>>("sequnces");
+
+            var result = await counterCol.FindOneAndUpdateAsync(
+                filter, update, options: opt);
+
+            return result.Value;
         }
     }
 }

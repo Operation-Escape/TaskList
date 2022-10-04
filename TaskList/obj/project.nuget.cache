@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "mgl+ymJOjAnCa3p6LDqSbRWznyySmFJEMr4D4aEC6lDvRLxa6UX1lOE7JwJMn7prxcVODELB9DiK89nlCt+VOw==",
+  "dgSpecHash": "jf5M4RkkI40rlBsRcc9W2SBjoghctuYBIKMFe82DMbdrFU5OkYP36G2ox4tvL104GjAhpANUofYSMpjZ9Qct5w==",
   "success": true,
   "projectFilePath": "C:\\TaskList\\TaskList\\TaskList\\TaskList.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oleg\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\Oleg\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",

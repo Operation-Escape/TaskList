@@ -1,4 +1,6 @@
-﻿using TaskList.Dto.Task.Validation;
+﻿using TaskList.Dto.Enums;
+using TaskList.Dto.Task.Commands.Abstract;
+using TaskList.Dto.Task.Validation;
 
 namespace TaskList.Dto.Task.Commands;
 
@@ -15,14 +17,11 @@ public class TaskSearchFilter : Command
     /// <summary>
     /// Sort direction, EOrderType
     /// </summary>
-    public int OrderType { get; set; }
+    public EOrderDirection OrderType { get; set; }
 
     public override bool IsValid()
     {
         ValidationResult = new TaskSearchFilterValidator<TaskSearchFilter>().Validate(this);
-        if (!ValidationResult.IsValid)
-            throw new ArgumentException(ValidationResult.ToString());
-
         return true;
     }
 }

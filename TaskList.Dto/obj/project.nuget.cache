@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GrW7BgZ/CJ2TqYGXKa54XlsvNilmu905MCvJ8eS5xqlfZTmJUuxsWHDTTIQQmUXvElqmkLyplXyIZRQQ8AyRAg==",
+  "dgSpecHash": "bZ8UiwfPDvUsW3Kb0R7+Rm10gD3wkJnDQOmVhUow6SKCDU0Ar8j5EH9iv+nDX1BrPrCUhBwUlNFDHy34gC3X3Q==",
   "success": true,
   "projectFilePath": "C:\\TaskList\\TaskList\\TaskList.Dto\\TaskList.Dto.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Oleg\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512"
+  ],
   "logs": []
 }

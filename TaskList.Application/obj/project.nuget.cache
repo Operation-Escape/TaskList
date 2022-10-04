@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "O2H6twt3BNzTKqBDqPEUdWgOyF2vXoGb0HCVY5j4YtShDJ7ywq9vyAu3ruOyM1FAurwTu7v6suynBIG6J8HylQ==",
+  "dgSpecHash": "GbJsKcnS+Tw2z2Ps9QM/h7YWXIgavYvm1jjYb1qawFdhfEq3R4KO4f0IDLEtqBgtfpIRs1YMtPtl6LDqgNU7ww==",
   "success": true,
   "projectFilePath": "C:\\TaskList\\TaskList\\TaskList.Application\\TaskList.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oleg\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\Oleg\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

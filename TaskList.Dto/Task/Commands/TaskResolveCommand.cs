@@ -1,4 +1,5 @@
-﻿using TaskList.Dto.Task.Validation;
+﻿using TaskList.Dto.Task.Commands.Abstract;
+using TaskList.Dto.Task.Validation;
 
 namespace TaskList.Dto.Task.Commands;
 
@@ -12,9 +13,6 @@ public class TaskResolveCommand : Command
     public override bool IsValid()
     {
         ValidationResult = new TaskResolveCommandValidator<TaskResolveCommand>().Validate(this);
-        if (!ValidationResult.IsValid)
-            throw new ArgumentException(ValidationResult.ToString());
-
-        return true;
+        return ValidationResult.IsValid;
     }
 }

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "F0Mo/Xbkii7sO4Lkb162pgG6rMqXv+PzB7dWlM1ZerJ9KbmSbUWNPr1s9dCIGPFqUXW1vcH6fNvM0Pd2n/JKGA==",
+  "dgSpecHash": "kMY8CqMPH/QXWHuNfL6Ya8E9+32+R5wE57EvDUF3DIQML0EMVGJQ7H0FON9yXYBis3oI+k0HxQwa2f9ExZSPkQ==",
   "success": true,
   "projectFilePath": "C:\\TaskList\\TaskList\\TaskList.Domain\\TaskList.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oleg\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\Oleg\\.nuget\\packages\\fluentvalidation\\11.2.2\\fluentvalidation.11.2.2.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Oleg\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",

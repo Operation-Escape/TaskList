@@ -12,13 +12,13 @@ public class SqlTaskRepository : SqlRepository<TaskModel, int>, ITaskRepository
     {
     }
 
-    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, int orderDirection)
+    public async Task<IEnumerable<TaskModel>> GetAllAsync(int? skip, int? limit, EOrderDirection orderDirection)
     {
         var query = DbSet.AsQueryable();
         
-        if (orderDirection == (int)EOrderDirection.Ascending)
+        if (orderDirection == EOrderDirection.Ascending)
             query = query.OrderBy(x => x.DateTimeCreated);
-        else if (orderDirection == (int)EOrderDirection.Descending)
+        else if (orderDirection == EOrderDirection.Descending)
             query = query.OrderByDescending(x => x.DateTimeCreated);
         
         if (skip.HasValue)

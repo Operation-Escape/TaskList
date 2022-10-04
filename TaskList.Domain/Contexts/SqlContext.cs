@@ -18,8 +18,8 @@ public class SqlContext : DbContext
         modelBuilder.Entity<TaskModel>().HasKey(t => t.Id);
         modelBuilder.Entity<TaskModel>().Property(x => x.Id).ValueGeneratedOnAdd();
         modelBuilder.Entity<TaskModel>().Property(x => x.DateTimeCreated)
-            .HasDefaultValueSql("now()")
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("now()");
     }
 
 }

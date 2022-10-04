@@ -21,6 +21,8 @@ public class TaskCommandHandler : ITaskCommandHandler
 
     public async Task UpdateAsync(TaskCreateUpdateCommand cmd)
     {
+        if(!cmd.IsValid())
+            throw new ArgumentException("Invalid arguments");
         var task = _mapper.Map<TaskModel>(cmd);
         _unitOfWork.Tasks.Update(task);
         await _unitOfWork.SaveChangesAsync();
@@ -34,13 +36,17 @@ public class TaskCommandHandler : ITaskCommandHandler
 
     public async Task InsertAsync(TaskCreateUpdateCommand cmd)
     {
+        if(!cmd.IsValid())
+            throw new ArgumentException("Invalid arguments");
         var newTask = _mapper.Map<TaskModel>(cmd);
-        _unitOfWork.Tasks.Add(newTask);
+        await _unitOfWork.Tasks.Add(newTask);
         await _unitOfWork.SaveChangesAsync();
     }
     
     public async Task ResolveTaskAsync(int id, TaskResolveCommand cmd)
     {
+        if(!cmd.IsValid())
+            throw new ArgumentException("Invalid argiments");
         var task = await _unitOfWork.Tasks.GetByIdAsync(id);
         if (task == null)
             return;

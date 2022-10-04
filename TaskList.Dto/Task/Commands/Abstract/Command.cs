@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace TaskList.Dto.Task.Commands
+namespace TaskList.Dto.Task.Commands.Abstract
 {
     public abstract class Command
     {
