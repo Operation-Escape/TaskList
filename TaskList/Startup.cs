@@ -12,6 +12,7 @@ using TaskList.Shared.Common.Extensions;
 using Microsoft.OpenApi.Models;
 using TaskList.Api.Middleware;
 using TaskList.Shared.Common.Swagger;
+using TaskList.Domain.Models;
 
 namespace TaskList.Api;
 
@@ -51,6 +52,7 @@ public class Startup {
         services.AddEntityFrameworkNpgsql()
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
+        services.AddMongoSettings(Configuration);
         services.AddScoped<IMongoContext, MongoContext>();
         
         services.AddScoped(typeof(MongoRepository<,>));
@@ -76,11 +78,11 @@ public class Startup {
             app.UseSwaggerUI();
         }
         
-        using (var scope = app.Services.CreateScope())
-        {
-            var dataContext = scope.ServiceProvider.GetRequiredService<SqlContext>();
-            dataContext.Database.Migrate();
-        }
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var dataContext = scope.ServiceProvider.GetRequiredService<SqlContext>();
+        //    dataContext.Database.Migrate();
+        //}
         app.UseMiddleware<ExceptionMiddleware>();
         app.UseAuthorization();
         app.MapControllers();

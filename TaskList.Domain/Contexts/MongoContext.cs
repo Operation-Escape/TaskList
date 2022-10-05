@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using TaskList.Domain.Contexts.Abstract;
+using TaskList.Domain.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace TaskList.Domain.Contexts
 {
@@ -10,12 +13,12 @@ namespace TaskList.Domain.Contexts
         public IClientSessionHandle Session { get; set; }
         public MongoClient MongoClient { get; set; }
         private readonly List<Func<Task>> _commands;
-        private readonly IConfiguration _configuration;
 
-        public MongoContext(IConfiguration configuration)
+        public MongoContext(IOptions<MongoSettings> options)
         {
-            _configuration = configuration;
             _commands = new List<Func<Task>>();
+            MongoClient = new MongoClient(options.Value.ConnectionString);
+            _database = MongoClient.GetDatabase(options.Value.Database);
         }
 
         public async Task<int> SaveChangesAsync()
@@ -38,24 +41,7 @@ namespace TaskList.Domain.Contexts
             return _commands.Count;
         }
 
-        private void ConfigureMongo()
-        {
-            if (MongoClient != null)
-            {
-                return;
-            }
-
-            MongoClient = new MongoClient(_configuration["MongoSettings:Connection"]);
-
-            _database = MongoClient.GetDatabase(_configuration["MongoSettings:DatabaseName"]);
-        }
-
-        public IMongoCollection<T> GetCollection<T>(string name)
-        {
-            ConfigureMongo();
-
-            return _database.GetCollection<T>(name);
-        }
+        public IMongoCollection<T> GetCollection<T>(string name) => _database.GetCollection<T>(name);
 
         public void Dispose()
         {
