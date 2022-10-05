@@ -13,7 +13,7 @@ public class TaskReaderLogic : ITaskReaderLogic
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     
-    public TaskReaderLogic(MongoUnitOfWork unitOfWork, IMapper mapper)
+    public TaskReaderLogic(SqlUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

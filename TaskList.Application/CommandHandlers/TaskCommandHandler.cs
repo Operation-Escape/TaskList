@@ -13,7 +13,7 @@ public class TaskCommandHandler : ITaskCommandHandler
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public TaskCommandHandler(MongoUnitOfWork unitOfWork, IMapper mapper)
+    public TaskCommandHandler(SqlUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
