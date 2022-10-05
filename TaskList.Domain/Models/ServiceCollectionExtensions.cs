@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskList.Domain.Contexts;
+using TaskList.Domain.Contexts.Abstract;
 
 namespace TaskList.Domain.Models
 {
@@ -20,6 +22,8 @@ namespace TaskList.Domain.Models
                 options.ConnectionString = cs;
                 options.Database = dbName;
             });
+            
+            services.AddScoped<IMongoContext, MongoContext>();
 
             return services;
         }

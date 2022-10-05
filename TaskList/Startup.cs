@@ -53,7 +53,6 @@ public class Startup {
             .AddDbContext<DbContext, SqlContext>(optionsAction => optionsAction.UseNpgsql(connectionString));
 
         services.AddMongoSettings(Configuration);
-        services.AddScoped<IMongoContext, MongoContext>();
         
         services.AddScoped(typeof(MongoRepository<,>));
         services.AddScoped(typeof(SqlRepository<,>));
